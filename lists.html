@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>The Garage</title>
+
+		<!-- Bootstrap -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<!-- Font Awesome -->
+		<link href="fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+		<!-- Ionicons -->
+		<link href="fonts/ionicons/css/ionicons.min.css" rel="stylesheet">
+		<!-- Cars -->
+		<link href="fonts/cars/style.css" rel="stylesheet">
+		<!-- FlexSlider -->
+		<link href="scripts/FlexSlider/flexslider.css" rel="stylesheet">
+		<!-- Owl Carousel -->
+		<link href="css/owl.carousel.css" rel="stylesheet">
+		<link href="css/owl.theme.default.css" rel="stylesheet">
+		<!-- noUiSlider -->
+		<link href="css/jquery.nouislider.min.css" rel="stylesheet">
+		<!-- Style.css -->
+		<link href="css/style.css" rel="stylesheet">
+
+
+<!-- Start of nav bar -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <div class="item"><i class="ion-model-s"></i><a class="navbar-brand" href="index.html"><b>The Garage</b></a></div>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a href="index.html">Home</a></li>
+      <li class="active"><a href="lists.html">Car List</a></li>
+      <li><a href="compare.html">Compare</a></li> 
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="news.html">News</a></li> 
+      <li><a href="contactus.html">Contact Us</a></li> 
+    </ul>
+  </div>
+</nav>
+<!-- End of nav bar -->
+
+
+<!-- Start of bg image -->
+<div class="page-title" style="background-image: url('images/bg1.jpg');">
+	<div class="inner">
+		<div class="container">
+			<div class="title">Car Lists</div> <!-- end .title -->
+		</div> <!-- end .container -->
+	</div> <!-- end .inner -->
+</div> <!-- end .page-title -->
+<!-- end of bg image -->
+
+
+		<section class="section small-top-padding white">
+			<div class="inner">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-9">
+							<div class="listings">
+								<div class="heading clearfix">
+									<h5> Results </h5>
+								</div> <!-- end .heading -->
+
+								<!-- Start of car listing -->
+								<div class="listings-grid clearfix">
+
+								<!-- PHP code to list cars -->
+
+								<?php
+								
+								// Create connection
+								$con=mysql_connect("localhost","root","") or die('Could not connect');
+								mysql_select_db("thegarage") or die("Cannot select db");
+								$sql = "SELECT * FROM carlist";
+								$result = mysql_query( $sql,$con);
+
+								if (mysql_num_rows($result)>0)
+								{
+							    
+							    while($row= mysql_fetch_assoc($result))
+							    {
+						        ?>
+						         <div class="listing">
+										<div class="image"><a href="details.html"><img src="images/<?$row["carimg"]?>" alt="listing" class="img-responsive"></a></div>
+										<div class="content">
+											<div class="title"><a href="details.html"><?echo $row["carname"]?><span>[ <?echo $row["carmodel"]?> ]</span></a></div>
+											<p><?echo $row["cardetails"]?></p>
+											<div class="price"><?echo $row["carprice"]?><span><?echo $row["carfuel"]?></span></div>
+								 		</div>
+								  </div> <!-- end .listing -->
+ 								}  
+ 								<!-- end of while -->
+ 								<?
+								}
+								// end of if
+								else 
+								{
+							    echo "0 results";
+								}
+								 mysql_close($con);
+								?>
+								
+								
+								 	
+
+
+								</div> <!-- end .listing-grid -->
+							   <!-- End of car listing -->
+							   <!-- End of php code -->
+
+
+							<!-- Start of pagination -->
+							<div class="pagination-wrapper">
+								<nav>
+									<ul class="pager">
+										<li class="previous"><a href=""><span><i class="fa fa-angle-left"></i></span>Prev</a></li>
+										<li class="next"><a href="">Next<span><i class="fa fa-angle-right"></i></span></a></li>
+									</ul>
+									<ul class="pagination">
+										<li class="active"><a href="">1</a></li>
+										<li><a href="">2</a></li>
+										<li><a href="">3</a></li>
+										<li class="disabled"><a href=""><i class="ion-ios-more"></i></a></li>
+										<li><a href="">7</a></li>
+									</ul>
+								</nav>
+							</div> <!-- end .pagination-wrapper -->
+						</div> <!-- end .col-sm-9 -->
+						<!-- End of pagination -->
+
+
+<!-- Search refine -->
+
+						<div class="col-sm-3">
+							<div class="refine-search">
+								<div class="title clearfix">Refine Your Search<i class="fa fa-search pull-right"></i></div>
+								<form>
+									<div class="form-group">
+										<div class="select-wrapper">
+											<select class="selectpicker">
+												<option>Brand</option>
+												<option>Option 1</option>
+												<option>Option 2</option>
+											</select>
+											<span class="arrow"><i class="fa fa-caret-down"></i></span>
+										</div> <!-- end .select-wrapper -->
+									</div> <!-- end .form-group -->
+									<div class="form-group">
+										<div class="select-wrapper">
+											<select class="selectpicker">
+												<option>Model</option>
+												<option>Option 1</option>
+												<option>Option 2</option>
+											</select>
+											<span class="arrow"><i class="fa fa-caret-down"></i></span>
+										</div> <!-- end .select-wrapper -->
+									</div> <!-- end .form-group -->
+									
+									
+									<div class="form-group">
+										<div class="select-wrapper">
+											<select class="selectpicker">
+												<option>Fuel</option>
+												<option>Option 1</option>
+												<option>Option 2</option>
+											</select>
+											<span class="arrow"><i class="fa fa-caret-down"></i></span>
+										</div> <!-- end .select-wrapper -->
+									</div> <!-- end .form-group -->
+									<div class="form-group">
+										<div class="select-wrapper">
+											<select class="selectpicker">
+												<option>Gear</option>
+												<option>Option 1</option>
+												<option>Option 2</option>
+											</select>
+											<span class="arrow"><i class="fa fa-caret-down"></i></span>
+										</div> <!-- end .select-wrapper -->
+									</div> <!-- end .form-group -->
+									
+									<button type="submit" class="button solid yellow block">Search</button>
+								</form>
+							</div> <!-- end  of class .refine-search -->
+						</div> <!-- end  of col-sm-3 -->
+					</div> <!-- end  of row -->
+				</div> <!-- end  ofcontainer -->
+			</div> <!-- end of inner -->
+		</section> 
+		
+<!-- End of search refine part-->
+
+
+
+
+<!-- Start of footer -->
+		<footer class="footer">
+			<div class="top">
+				<div class="container">
+					
+					<div class="row">
+						
+						<div class="col-sm-4">
+							<h5>Quick Links</h5>
+							<a href="index.html" class="content">Home</a>
+							<a href="lists.html" class="clearfix">Car List</a>
+							<a href="compare.html" class="clearfix">Car Compare</a>
+							<a href="news.html" class="clearfix">Latest News</a>
+							<a href="contactus.html" class="clearfix">Contact Us</a>
+						
+								
+						</div> <!-- end of .col-sm-4 -->
+
+
+						<div class="col-sm-4">
+							<h5>About Us</h5>
+							<p>The Garage -- company lets you </p>
+							<hr />
+							<div class="iconbox-left">
+								<div class="icon"><i class="fa fa-map-marker"></i></div>
+								<div class="content"><p>The Garage Company, Kalamassery</p></div>
+							</div> 
+							<div class="iconbox-left">
+								<div class="icon"><i class="fa fa-envelope"></i></div> 
+								<div class="content"><p>help@thegarage.com</p></div> 
+							</div> 
+							<div class="iconbox-left">
+								<div class="icon"><i class="fa fa-phone"></i></div> 
+								<div class="content"><p>123-456-7890</p></div> 
+							</div> 
+						</div> <!-- end of .col-sm-4 -->
+
+
+
+					</div> <!-- end .row -->
+				</div> <!-- end .container -->
+			</div> <!-- end .top -->
+
+			<div class="bottom">
+				<span class="copyright">Copyright 2016. The Garage Company.</span>
+			</div> <!-- end .bottom -->
+		</footer> 
+<!-- end of footer -->
+
+
+
+		<!-- jQuery -->
+		<script src="js/jquery-1.11.2.min.js"></script>
+		<!-- Bootstrap -->
+		<script src="js/bootstrap.min.js"></script>
+		<!-- Inview -->
+		<script src="js/jquery.inview.min.js"></script>
+		<!-- google maps -->
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+		<!-- Tweetie -->
+		<script src="scripts/Tweetie/tweetie.min.js"></script>
+		<!-- FlexSlider -->
+		<script src="scripts/FlexSlider/jquery.flexslider-min.js"></script>
+		<!-- Owl Carousel -->
+		<script src="js/owl.carousel.min.js"></script>
+		<!-- Isotope -->
+		<script src="js/isotope.pkgd.min.js"></script>
+		<script src="js/imagesloaded.pkgd.min.js"></script>
+		<!-- noUiSlider -->
+		<script src="js/jquery.nouislider.all.min.js"></script>
+		<!-- Scripts.js -->
+		<script src="js/scripts.js"></script>
+
+	</body>
+</html>
